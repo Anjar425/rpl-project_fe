@@ -19,45 +19,56 @@ const layout = ({ children }) => {
         }
     }, []);
 
+    const logout = async () => {
+        try {
+            Cookies.remove("token");
+            router.push('/auth/login');
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
+    };
+
     return (
         <>
-            <div className='min-h-screen flex flex-col '>
-                <nav className="bg-gray-800 border-gray-200 border-b-[1px]">
-                    <div className="max-w-7xl mx-auto px-4">
-                        <div className="flex items-center justify-between h-16">
-                            <div className="flex flex-row justify-center items-center gap-5">
-                                <div className="-mr-2 flex flex-row">
-                                    <button onClick={toggleNavbar} className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out">
-                                        <svg className={`${isOpen ? 'hidden' : 'block'} h-6 w-6`} stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                                        </svg>
-                                        <svg className={`${isOpen ? 'block' : 'hidden'} h-6 w-6`} stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                                <a href="#" className="text-white">Logo</a>
-                            </div>
-                            <div className="hidden md:block">
-                                <div className="ml-10 flex items-baseline space-x-4">
-                                    <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                                    <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
-                                    <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-                                </div>
-                            </div>
-                        </div>
+            <div className='min-h-screen flex flex-row overflow-hidden'>
+                <aside className='absolute left-0 top-0 z-[9999] h-screen w-72 bg-gray-900 overflow-y-hidden flex flex-col lg:static'>
+                    <div className='flex flex-row items-center justify-center h-20 text-white'>
+                        <img src='' />
+                        <h1 className='font-bold text-2xl '>DASHBOARD</h1>
                     </div>
-                </nav>
-                <div className={`${isOpen ? 'block' : 'hidden'} flex flex-row flex-1 h-full`}>
-                    <div className=" px-10 pt-2 pb-3 bg-gray-800">
-                        <a href="#" className="block text-white px-3 py-2 rounded-md text-base font-medium">Home</a>
-                        <a href="#" className="mt-1 block text-white px-3 py-2 rounded-md text-base font-medium">About</a>
-                        <a href="#" className="mt-1 block text-white px-3 py-2 rounded-md text-base font-medium">Contact</a>
-                    </div>
-                    {children}
-                </div>
-            </div>
+                    <div className='text-gray-300 px-8 py-8 flex-1'>
+                        <h3 className="mb-4 ml-4 text-sm font-bold text-bodydark2 text-white">MENU</h3>
+                        <ul className="mb-6 flex flex-col gap-1.5 ">
+                            <li>
+                                <button className="hover:bg-gray-700 group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 bg-graydark dark:bg-meta-4">Dashboard</button>
+                            </li>
+                            <li>
+                                <button className="hover:bg-gray-700 group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 bg-graydark dark:bg-meta-4">Dashboard</button>
+                            </li>
+                            <li>
+                                <button className="hover:bg-gray-700 group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 bg-graydark dark:bg-meta-4">Dashboard</button>
+                            </li>
+                            <li>
+                                <button className="hover:bg-gray-700 group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 bg-graydark dark:bg-meta-4">Dashboard</button>
+                            </li>
+                        </ul>
+                    </div >
 
+                    <div className=' justify-self-end items-center py-10 justify-center flex'>
+                        <div className='flex flex-row justify-center items-center'>
+                            <button onClick={logout} className='text-white font-semibold text-lg'>LOG OUT</button>
+                        </div>
+
+                    </div>
+                </aside>
+                <div className='relative bg-white w-full flex flex-row h-20 justify-end px-10'>
+                    <img src="" alt="" />
+                    <button href="#" className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</button>
+                    <button href="#" className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</button>
+                    <button href="#" className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</button>
+
+                </div>
+            </div >
         </>
     )
 }

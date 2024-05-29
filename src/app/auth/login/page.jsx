@@ -12,6 +12,7 @@ const login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const [token, setToken] = useState("");
 
     const [validation, setValidation] = useState([]);
 
@@ -35,7 +36,7 @@ const login = () => {
 
         try {
             await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/sanctum/csrf-cookie`);
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/login`, formData, { headers: headers }); // Mengubah dari GET menjadi POST
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/login`, formData, { headers: headers }); 
             Cookies.set("token", response.data.body.token);
             router.push("/dashboard");
         } catch (error) {
@@ -61,8 +62,7 @@ const login = () => {
             <section className="bg-gray-50 dark:bg-gray-900">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                     <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                        <Image src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" width={32} height={32} className="mr-2" />
-                        Flowbite
+                        Login
                     </a>
                     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
