@@ -19,6 +19,12 @@ export default function Test() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
+        axios.defaults.headers.post["X-Requested-With"] = "XMLHttpRequest";
+        axios.defaults.withCredentials = true;
+
+
         setLoading(true);
 
         const formData = new FormData();
@@ -29,10 +35,10 @@ export default function Test() {
 
         const headers = {
             Accept: "application/json",
-            "Content-Type": "multipart/form-data", // Mengubah dari GET menjadi POST
         };
 
         try {
+            await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API}/sanctum/csrf-cookie`);
             await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/register`, formData, { headers: headers });
             router.push('/auth/login')
             // Handle successful registration, e.g., show success message or redirect
